@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section class="content-section">
+  <h1>Tags</h1>
+  <div class="tags-grid">
+    {{ range .Data.Terms.Alphabetical }}
+      <!-- Make the entire tag-card clickable by wrapping its content in <a> -->
+      <a class="tag-card" href="{{ (printf "/tags/%s" .Term | urlize | absURL) }}">
+        <span class="tag-name">{{ .Term }}</span> ({{ .Count }})
+      </a>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

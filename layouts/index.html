@@ -1,0 +1,16 @@
+{{ define "main" }}
+<section class="intro slot-medium">
+  <div class="intro-content">
+    <h2>{{ .Site.Params.author }}</h2>
+    <p>{{ .Site.Params.info }}</p>
+    {{ if .Site.Params.avatarurl }}
+      <div class="avatar-container">
+        <img src="{{ .Site.Params.avatarurl }}" alt="{{ .Site.Params.author }}" class="avatar">
+      </div>
+    {{ end }}
+    <div class="button-group intro-button-group">
+      <a href="mailto:hrishi.kb@gmail.com" class="btn">Drop an email</a>
+    </div>
+  </div>
+</section>
+{{ end }}

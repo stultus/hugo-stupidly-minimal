@@ -1,0 +1,23 @@
+<header>
+  <div class="nav">
+    <div class="logo-container">
+      <h1><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+    </div>
+    <div class="inner-nav-group">
+      <div class="icon-menu">
+        <span class="bar bar--1"></span>
+        <span class="bar bar--2"></span>
+        <span class="bar bar--3"></span>
+      </div>
+    </div>
+    
+    <!-- Mobile nav moved inside .nav for proper positioning -->
+    <nav class="mobile-nav">
+      <ul class="nav-links">
+        {{ range .Site.Menus.main }}
+          <li class="nav-link-li"><a class="nav-link" href="{{ .URL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ .Title }}</title>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <div class="wrapper">
+    <div class="centered-container">
+      {{ partial "header.html" . }}
+      <main class="content-container">
+        {{ block "main" . }}{{ end }}
+      </main>
+      {{ partial "footer.html" . }}
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuIcon = document.querySelector('.icon-menu');
+      const mobileNav = document.querySelector('.mobile-nav');
+      const navContainer = document.querySelector('.nav');
+
+      if (menuIcon && mobileNav && navContainer) {
+        menuIcon.addEventListener('click', () => {
+          mobileNav.classList.toggle('is-visible');
+          menuIcon.classList.toggle('open');
+        });
+
+        // Close menu when clicking outside of the nav area
+        document.addEventListener('click', (event) => {
+          const isClickInsideNav = navContainer.contains(event.target);
+          if (!isClickInsideNav && mobileNav.classList.contains('is-visible')) {
+            mobileNav.classList.remove('is-visible');
+            menuIcon.classList.remove('open');
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

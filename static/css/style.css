@@ -1,0 +1,483 @@
+@import url('https://fonts.googleapis.com/css2?family=Manjari:wght@400;700&family=Overpass+Mono:wght@300..700&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  /* Flexoki Colors */
+  --flexoki-light-bg: rgb(255, 252, 240);
+  --flexoki-light-bg2: rgb(242, 240, 229);
+  --flexoki-light-ui: rgb(230, 228, 217);
+  --flexoki-light-ui2: rgb(218, 216, 206);
+  --flexoki-light-ui3: rgb(206, 205, 195);
+  --flexoki-light-tx3: rgb(183, 181, 172);
+  --flexoki-base-850: #343331;
+  --flexoki-base-600: #6f6e69;
+
+  /* Core Colors */
+  --color-brand: rgb(58, 169, 159);
+  --color-bg: var(--flexoki-light-bg);
+  --color-text: var(--flexoki-base-600);
+  --color-title: var(--flexoki-base-850);
+  --color-border: var(--flexoki-light-bg2);
+
+  /* Fonts */
+  --text-default: "Public Sans", "Manjari", sans-serif;
+  --text-mono: "Overpass Mono", monospace;
+
+  /* Font Weights */
+  --weight-regular: 300;
+  --weight-bold: 500;
+
+  /* Font Sizes */
+  --font-regular: 1rem;
+  --font-small: 0.8325rem;
+
+  /* Spacing Scale */
+  --space-unit: 8px;
+  --space-half: calc(0.5 * var(--space-unit));  /*4px*/
+  --space-one: calc(1 * var(--space-unit));     /*8px*/
+  --space-two: calc(2 * var(--space-unit));     /*16px*/
+  --space-three: calc(3 * var(--space-unit));   /*24px*/
+  --space-four: calc(4 * var(--space-unit));    /*32px*/
+  --space-five: calc(5 * var(--space-unit));    /*40px*/
+
+  --line-height-normal: 1.5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: var(--text-default);
+  font-weight: 400;
+  color: var(--color-text);
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-bg);
+  line-height: var(--line-height-normal);
+  font-size: var(--font-regular);
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5 {
+  font-size: var(--font-regular);
+  color: var(--color-title);
+  margin-bottom: var(--space-one);
+  font-weight: var(--weight-bold);
+  line-height: var(--line-height-normal);
+}
+
+h6 {
+  font-size: var(--font-small);
+  font-weight: var(--weight-regular);
+  color: var(--color-title);
+  margin-bottom: var(--space-one);
+  line-height: var(--line-height-normal);
+}
+
+p {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-regular);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+  margin-bottom: var(--space-four);
+  text-align: left;
+}
+
+a {
+  color: var(--flexoki-base-600);
+  text-decoration: none;
+  border-bottom: 1px dotted currentColor;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+a:hover {
+  background-color: var(--flexoki-light-bg2);
+}
+
+b {
+  font-weight: var(--weight-bold);
+}
+
+i {
+  font-weight: 300;
+}
+
+/* Lists: Adjust bullet position for cleaner alignment */
+ul, ol {
+  padding-left: var(--space-two);
+  margin-bottom: var(--space-two);
+  list-style-position: outside;
+}
+
+li {
+  line-height: var(--space-four);
+  margin-bottom: var(--space-one);
+}
+
+/* Layout Wrapper */
+.wrapper {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--color-bg);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.centered-container {
+  max-width: 640px;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  padding: var(--space-three) var(--space-two);
+}
+
+/* Slot Spacing Utilities */
+.slot-small {
+  padding: var(--space-three) 0 var(--space-two) 0;
+}
+.slot-medium {
+  padding: var(--space-three) 0;
+}
+.slot-large {
+  padding: var(--space-four) 0;
+}
+
+/* Content Section: add vertical spacing similar to intro-content */
+.content-section {
+  margin-top: var(--space-three);
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-one) 0px;
+  position: relative;
+}
+
+.nav a {
+  text-decoration: none;
+}
+
+.nav-right {
+  display: flex;
+  gap: var(--space-one);
+  align-items: center;
+}
+
+.inner-nav-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-one);
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-one);
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link-li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-regular);
+  color: var(--color-title);
+  padding: var(--space-one) var(--space-one);
+  display: block;
+  background: transparent;
+}
+
+.nav-link:hover {
+  background: var(--flexoki-light-ui);
+  color: var(--color-brand);
+}
+
+/* Mobile Nav Panel */
+.mobile-nav {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--flexoki-light-ui);
+  padding: var(--space-one);
+  border-radius: var(--space-one);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 150px;
+  border: 1px solid var(--flexoki-light-ui2);
+  z-index: 9999; /* Ensure menu is above post content */
+}
+
+.mobile-nav.is-visible {
+  display: block;
+}
+
+/* Icon Menu (Hamburger -> Close) */
+.icon-menu {
+  --gap: 5px;
+  --height-bar: 1.5px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  cursor: pointer;
+}
+
+.bar {
+  height: var(--height-bar);
+  width: 20px;
+  border-radius: 0.5rem;
+  background-color: var(--color-title);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.icon-menu.open .bar.bar--1 {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.icon-menu.open .bar.bar--2 {
+  opacity: 0;
+}
+.icon-menu.open .bar.bar--3 {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Intro Section */
+.intro-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.intro {
+  margin-bottom: var(--space-two);
+}
+
+/* Avatar Container */
+.avatar-container {
+  text-align: center;
+  margin: var(--space-three) 0;
+}
+
+.avatar {
+  display: block;
+  margin: 0 auto;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Button Group */
+.button-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: var(--space-three);
+}
+
+/* Post Listings (Listing Pages) */
+.post-list {
+  margin-bottom: var(--space-four);
+}
+
+.post-listing {
+  padding-left: var(--space-two);
+  margin-bottom: var(--space-four);
+}
+
+.post-listing-item {
+  margin-bottom: var(--space-one);
+  line-height: var(--line-height-normal);
+}
+
+.post-title {
+  font-weight: var(--weight-bold);
+  color: var(--color-title);
+  display: inline-block;
+  max-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.post-title a {
+  color: var(--color-title);
+  transition: color 0.3s ease;
+}
+
+.post-title a:hover {
+  color: var(--color-brand);
+}
+
+.post-date {
+  color: var(--color-text);
+  opacity: 0.8;
+  margin-left: var(--space-half);
+  font-size: var(--font-small);
+}
+
+/* Post Items (Single Posts) */
+.post-item h3 {
+  font-weight: normal;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-one);
+}
+
+.post-item p {
+  margin-bottom: var(--space-two);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+}
+
+/* Single Post Content */
+.post-content h1 {
+  margin-bottom: var(--space-two);
+}
+
+.post-content p,
+.post-content ul,
+.post-content ol {
+  margin-bottom: var(--space-two);
+}
+
+/* Code Blocks and Inline Code */
+code {
+  background: var(--color-border);
+  border-radius: var(--space-half);
+  padding: 0 var(--space-half);
+  font-family: var(--text-mono);
+  font-size: var(--font-regular);
+}
+
+.post-content pre {
+  background: var(--flexoki-light-ui2);
+  padding: var(--space-two);
+  overflow-x: auto;
+  border-radius: var(--space-half);
+  margin-bottom: var(--space-three);
+}
+
+.post-content pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  font-family: var(--text-mono);
+  font-size: var(--font-regular);
+  color: var(--color-text);
+  line-height: var(--line-height-normal);
+}
+
+/* Blockquotes */
+blockquote {
+  padding: var(--space-two);
+  font-size: var(--font-regular);
+  line-height: var(--line-height-normal);
+  font-weight: var(--weight-regular);
+  color: var(--color-text);
+  background-color: var(--color-border);
+  border-left: 2px solid var(--color-brand);
+  margin-bottom: var(--space-two);
+}
+
+/* Images */
+img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  margin-bottom: var(--space-two);
+}
+
+/* Buttons */
+.btn {
+  padding: .5rem .8rem;
+  border-radius: .2rem;
+  color: var(--flexoki-light-bg);
+  background: linear-gradient(to right, #2a2927, #403e3b);
+  transition: .3s ease;
+  text-decoration: none;
+  font-weight: var(--weight-regular);
+  font-size: var(--font-small);
+  border: 0;
+}
+.btn:hover {
+  background: linear-gradient(to right, var(--flexoki-base-850), #66645f);
+}
+
+/* Tags & Categories */
+.tags a, .categories a {
+  text-decoration: none;
+  border-bottom: none;
+  background: var(--flexoki-light-ui2);
+  padding: var(--space-half) var(--space-one);
+  border-radius: var(--space-half);
+  font-size: var(--font-small);
+  margin-right: var(--space-half);
+  display: inline-block;
+  color: var(--color-title);
+}
+.tags a:hover, .categories a:hover {
+  background: var(--flexoki-light-ui);
+}
+
+/* Footer */
+.footer {
+  margin-top: var(--space-five);
+  text-align: center;
+}
+.footer p {
+  font-size: var(--font-small);
+  color: var(--color-title);
+}
+
+/* Tags Page (Three-column layout) */
+.tags-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile first: single column */
+  gap: var(--space-three);
+  margin-top: var(--space-three);
+  margin-bottom: var(--space-four);
+}
+
+@media (min-width: 600px) {
+  .tags-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .tags-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.tag-card {
+  display: block;
+  background: var(--flexoki-light-ui2);
+  padding: var(--space-two);
+  border-radius: var(--space-half);
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  color: var(--color-title);
+}
+
+.tag-card:hover {
+  background: var(--flexoki-light-ui);
+}
+
+.tag-card .tag-name {
+  font-weight: var(--weight-bold);
+  margin-right: var(--space-half);
+}
+
+/* Mobile-first design - already suitable by default */

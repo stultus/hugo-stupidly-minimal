@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page Not Found | {{ .Site.Title }}</title>
+  {{ partial "head.html" . }}
+</head>
+<body>
+  <div class="wrapper">
+    <div class="centered-container">
+      {{ partial "header.html" . }}
+      <main class="content-container content-section">
+        <h1>404 - Mischief Managed?</h1>
+        <p>It seems you’ve stumbled into a place not found on this map. Perhaps even the Marauder’s Map can’t help you here.</p>
+        <p>Try these spells:</p>
+        <ul>
+          <li><b><i>“Lumos”</i></b> to shed some light on where you’re going.</li>
+          <li><b><i>“Accio Homepage”</i></b> to head back to <a href="{{ .Site.BaseURL }}">safety</a>.</li>
+        </ul>
+        <p>Or if you’re feeling adventurous, <b><i>“Alohomora”</i></b> might unlock new secrets.</p>
+        <p>Until then, best of luck, traveler!</p>
+      </main>
+      {{ partial "footer.html" . }}
+    </div>
+  </div>
+</body>
+</html>
