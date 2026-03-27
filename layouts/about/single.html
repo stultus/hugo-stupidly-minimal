@@ -1,0 +1,26 @@
+{{ define "main" }}
+<article class="about-page">
+
+  <header class="about-header">
+    <a href="/" class="post-back">&larr; Home</a>
+    <div class="about-hero">
+      <div class="about-hero-text">
+        <h1 class="about-title">{{ .Site.Params.author }}</h1>
+        <p class="about-tagline">{{ .Site.Params.tagline }}</p>
+      </div>
+      <div class="about-hero-photo">
+        <img src="/img/hrishikesh_bhaskaran.jpg" alt="{{ .Site.Params.author }}" class="about-photo">
+      </div>
+    </div>
+  </header>
+
+  <div class="about-body">
+    {{ .Content }}
+  </div>
+
+  <footer class="post-footer">
+    <a href="/" class="post-footer-link">&larr; Home</a>
+  </footer>
+
+</article>
+{{ end }}

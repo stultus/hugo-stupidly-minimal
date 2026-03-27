@@ -1,10 +1,27 @@
 {{ define "main" }}
-<section class="content-section">
-  <article class="post-content">
-    <h1>{{ .Title }}</h1>
-    <div>
-      {{ .Content }}
+<article class="post">
+  <header class="post-header">
+    <a href="{{ if eq .Section "post" }}/post/{{ else }}/{{ end }}" class="post-back">&larr; {{ if eq .Section "post" }}Posts{{ else }}Home{{ end }}</a>
+    <h1 class="post-title">{{ .Title }}</h1>
+    {{ if .Date }}
+    <div class="post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+      {{ with .Params.tags }}
+      <span class="post-meta-sep">&middot;</span>
+      {{ range . }}
+      <a href="{{ printf "/tags/%s/" (urlize .) }}" class="post-tag">{{ . }}</a>
+      {{ end }}
+      {{ end }}
     </div>
-  </article>
-</section>
+    {{ end }}
+  </header>
+
+  <div class="post-body">
+    {{ .Content }}
+  </div>
+
+  <footer class="post-footer">
+    <a href="{{ if eq .Section "post" }}/post/{{ else }}/{{ end }}" class="post-footer-link">&larr; {{ if eq .Section "post" }}All posts{{ else }}Home{{ end }}</a>
+  </footer>
+</article>
 {{ end }}

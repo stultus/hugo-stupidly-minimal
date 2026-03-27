@@ -1,17 +1,22 @@
 {{ define "main" }}
-<section class="post-list content-section">
-  <h1>{{ .Title }}</h1>
-  <p>{{ .Content }}</p>
+<section class="list-page">
+  <header class="list-header">
+    <a href="/" class="post-back">&larr; Home</a>
+    <h1 class="list-title">{{ .Title }}</h1>
+    {{ with .Content }}
+    <div class="list-content">{{ . }}</div>
+    {{ end }}
+  </header>
 
+  {{ if .Pages }}
   <ul class="post-listing">
-    {{ range .Pages }}
-      <li class="post-listing-item">
-        <span class="post-title">
-          <a href="{{ .Permalink }}">{{ .Title }}</a>
-        </span>
-        <small class="post-date">{{ .Date.Format "January 2, 2006" }}</small>
-      </li>
+    {{ range .Pages.ByDate.Reverse }}
+    <li class="post-listing-item">
+      <a href="{{ .RelPermalink }}" class="post-title">{{ .Title }}</a>
+      <span class="post-date">{{ .Date.Format "Jan 2006" }}</span>
+    </li>
     {{ end }}
   </ul>
+  {{ end }}
 </section>
 {{ end }}
