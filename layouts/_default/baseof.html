@@ -87,22 +87,31 @@
       const sunIcon = document.querySelector('.sun-icon');
       const moonIcon = document.querySelector('.moon-icon');
       
+      const mobileToggle = document.querySelector('.mobile-theme-toggle');
+      const sunIconMobile = document.querySelector('.sun-icon-mobile');
+      const moonIconMobile = document.querySelector('.moon-icon-mobile');
+
       function updateIcons() {
         const isDark = document.body.classList.contains('dark-theme');
-        sunIcon.style.display = isDark ? 'none' : 'block';
-        moonIcon.style.display = isDark ? 'block' : 'none';
+        if (sunIcon) sunIcon.style.display = isDark ? 'none' : 'block';
+        if (moonIcon) moonIcon.style.display = isDark ? 'block' : 'none';
+        if (sunIconMobile) sunIconMobile.style.display = isDark ? 'none' : 'block';
+        if (moonIconMobile) moonIconMobile.style.display = isDark ? 'block' : 'none';
       }
 
       // Initialize icons based on current theme
       updateIcons();
 
-      themeToggle.addEventListener('click', () => {
+      function toggleTheme() {
         document.body.classList.toggle('dark-theme');
         document.documentElement.classList.toggle('dark-theme');
         const isDark = document.body.classList.contains('dark-theme');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
         updateIcons();
-      });
+      }
+
+      themeToggle.addEventListener('click', toggleTheme);
+      if (mobileToggle) mobileToggle.addEventListener('click', toggleTheme);
 
       // Listen for system theme changes only if no saved preference
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {

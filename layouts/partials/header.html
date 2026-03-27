@@ -1,9 +1,13 @@
 <header>
   <div class="nav">
     <div class="logo-container">
-      <a href="{{ .Site.BaseURL }}" class="site-title">{{ .Site.Title }}</a>
+      <a href="{{ .Site.BaseURL }}" class="site-logo-link">
+        <img src="/img/logo-light.png" alt="{{ .Site.Title }}" class="site-logo site-logo-light">
+        <img src="/img/logo-dark.png" alt="{{ .Site.Title }}" class="site-logo site-logo-dark">
+        <span class="site-wordmark">stultus</span>
+      </a>
     </div>
-    
+
     <!-- Desktop Navigation -->
     <nav class="desktop-nav">
       <ul class="desktop-nav-links">
@@ -12,9 +16,13 @@
         {{ end }}
       </ul>
     </nav>
-    
-    <!-- Mobile Menu Icon -->
+
+    <!-- Mobile: theme toggle + menu icon -->
     <div class="inner-nav-group">
+      <button class="mobile-theme-toggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon-mobile" width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="moon-icon-mobile" style="display:none;" width="18" height="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
       <div class="icon-menu">
         <span class="bar bar--1"></span>
         <span class="bar bar--2"></span>
@@ -22,8 +30,8 @@
       </div>
     </div>
   </div>
-  
-  <!-- Mobile nav expandable - outside main nav flex container -->
+
+  <!-- Mobile nav expandable -->
   <nav class="mobile-nav">
     <ul class="nav-links">
       {{ range .Site.Menus.main }}
