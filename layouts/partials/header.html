@@ -1,3 +1,4 @@
+{{ $currentURL := .RelPermalink }}
 <header>
   <div class="nav">
     <div class="logo-container">
@@ -12,7 +13,7 @@
     <nav class="desktop-nav">
       <ul class="desktop-nav-links">
         {{ range .Site.Menus.main }}
-          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          <li><a href="{{ .URL }}"{{ if hasPrefix $currentURL .URL }} class="nav-active"{{ end }}>{{ .Name }}</a></li>
         {{ end }}
       </ul>
     </nav>
@@ -35,7 +36,7 @@
   <nav class="mobile-nav">
     <ul class="nav-links">
       {{ range .Site.Menus.main }}
-        <li class="nav-link-li"><a class="nav-link" href="{{ .URL }}">{{ .Name }}</a></li>
+        <li class="nav-link-li"><a class="nav-link{{ if hasPrefix $currentURL .URL }} nav-active{{ end }}" href="{{ .URL }}">{{ .Name }}</a></li>
       {{ end }}
     </ul>
   </nav>
