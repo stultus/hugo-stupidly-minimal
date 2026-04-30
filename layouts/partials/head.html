@@ -24,13 +24,16 @@
 {{ if .IsHome }}{{ $desc = .Site.Params.description }}{{ end }}
 
 {{/* ── Determine image ── */}}
-{{ $img := "img/hrishikesh_bhaskaran-bnw.png" | absURL }}
+{{ $img := "" }}
+{{ with .Site.Params.ogImage }}{{ $img = . | absURL }}{{ end }}
+{{ if not $img }}{{ with .Site.Params.avatarurl }}{{ $img = . | absURL }}{{ end }}{{ end }}
 {{ with .Params.image }}{{ $img = . | absURL }}{{ end }}
 
 {{/* ── Determine title for social ── */}}
 {{ $socialTitle := printf "%s — %s" .Title .Site.Params.author }}
 {{ if .IsHome }}{{ $socialTitle = printf "%s — %s" .Site.Params.author .Site.Params.tagline }}{{ end }}
-{{ if eq .Type "about" }}{{ $socialTitle = printf "About %s (stultus) — VP Engineering at Entri | Developer, Screenwriter & FOSS Contributor" .Site.Params.author }}{{ end }}
+{{ if eq .Type "about" }}{{ $socialTitle = printf "About %s — %s" .Site.Params.author .Site.Params.tagline }}{{ end }}
+{{ with .Params.seoTitle }}{{ $socialTitle = . }}{{ end }}
 
 {{/* ── Open Graph ── */}}
 <meta property="og:site_name" content="{{ .Site.Params.author }}">
@@ -39,8 +42,8 @@
 <meta property="og:title" content="{{ $socialTitle }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:image" content="{{ $img }}">
-<meta property="og:image:alt" content="{{ .Site.Params.author }}">
+{{ with $img }}<meta property="og:image" content="{{ . }}">
+<meta property="og:image:alt" content="{{ $.Site.Params.author }}">{{ end }}
 {{ if .IsPage }}
   {{ with .Date }}<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
   {{ with .Lastmod }}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
@@ -49,12 +52,12 @@
 
 {{/* ── Twitter Card ── */}}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@_stultus">
-<meta name="twitter:creator" content="@_stultus">
+{{ with .Site.Params.twitter }}<meta name="twitter:site" content="@{{ . }}">
+<meta name="twitter:creator" content="@{{ . }}">{{ end }}
 <meta name="twitter:title" content="{{ $socialTitle }}">
 <meta name="twitter:description" content="{{ $desc }}">
-<meta name="twitter:image" content="{{ $img }}">
-<meta name="twitter:image:alt" content="{{ .Site.Params.author }}">
+{{ with $img }}<meta name="twitter:image" content="{{ . }}">
+<meta name="twitter:image:alt" content="{{ $.Site.Params.author }}">{{ end }}
 
 {{/* ── Favicon ── */}}
 <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
@@ -72,7 +75,7 @@
 <link rel="stylesheet" href="{{ . | relURL }}">
 {{ end }}
 
-{{/* ── JSON-LD Structured Data ── */}}
+{{/* ── JSON-LD: WebSite (homepage) ── */}}
 {{ if .IsHome }}
 <script type="application/ld+json">
 {
@@ -84,8 +87,8 @@
   "author": {
     "@type": "Person",
     "name": "{{ .Site.Params.author }}",
-    "url": "{{ .Site.BaseURL }}",
-    "alternateName": ["stultus", "Hrishi", "Hrishikesh"]
+    "url": "{{ .Site.BaseURL }}"{{ with .Site.Params.alternateNames }},
+    "alternateName": {{ split . "," | jsonify | safeJS }}{{ end }}
   },
   "potentialAction": {
     "@type": "SearchAction",
@@ -96,119 +99,12 @@
 </script>
 {{ end }}
 
+{{/* ── JSON-LD: Person (about page) — site-overridable ── */}}
 {{ if eq .Type "about" }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Hrishikesh Bhaskaran",
-  "alternateName": ["stultus", "Hrishi", "Hrishikesh", "Hrishikesh KB", "ഋഷികേശ് ഭാസ്‌ക്കരൻ", "ഹൃഷികേശ്", "ഋഷികേശ്", "ഋഷി", "ഹൃഷി"],
-  "givenName": "Hrishikesh",
-  "familyName": "Bhaskaran",
-  "jobTitle": "Vice President of Engineering",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Entri",
-    "url": "https://entri.app"
-  },
-  "hasOccupation": [
-    {
-      "@type": "Occupation",
-      "name": "Vice President of Engineering",
-      "occupationalCategory": "Engineering Leadership"
-    },
-    {
-      "@type": "Occupation",
-      "name": "Screenwriter",
-      "occupationalCategory": "Creative Writing"
-    }
-  ],
-  "memberOf": [
-    {
-      "@type": "Organization",
-      "name": "TinkerHub Foundation",
-      "url": "https://tinkerhub.org/",
-      "description": "A community of tinkerers, makers, and students working to empower people who share a passion to innovate."
-    },
-    {
-      "@type": "Organization",
-      "name": "Swathanthra Malayalam Computing",
-      "alternateName": "SMC",
-      "url": "https://smc.org.in"
-    }
-  ],
-  "alumniOf": {
-    "@type": "CollegeOrUniversity",
-    "name": "College of Engineering Munnar"
-  },
-  "url": "{{ .Site.BaseURL }}",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ .Permalink }}"
-  },
-  "image": "{{ "img/hrishikesh_bhaskaran.jpg" | absURL }}",
-  "description": "Hrishikesh Bhaskaran is a software engineer, FOSS contributor, and screenwriter from Kerala, India. Vice President of Engineering at Entri. Also known by the pseudonym stultus.",
-  "nationality": "Indian",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Kochi",
-    "addressRegion": "Kerala",
-    "addressCountry": "IN"
-  },
-  "knowsAbout": ["Software Engineering", "Software Architecture", "System Design", "Distributed Systems", "API Design", "Engineering Leadership", "Engineering Management", "Team Building", "Product Strategy", "Free and Open Source Software", "Language Computing", "Malayalam Computing", "Digital Privacy", "Screenwriting"],
-  "subjectOf": [
-    {
-      "@type": "Article",
-      "headline": "How techie Hrishikesh Bhaskaran, a VM Basheer fan, turned screenplay writer for ‘Neelavelicham’",
-      "url": "https://www.moneycontrol.com/news/trends/entertainment/neelavelicham-additional-screenplay-writer-hrishikesh-bhaskaran-interview-10455691.html",
-      "publisher": { "@type": "Organization", "name": "Moneycontrol" }
-    },
-    {
-      "@type": "Article",
-      "headline": "We Look At Neelavelicham As A Tribute To Bhargavi Nilayam: Tovino Thomas",
-      "url": "https://www.filmcompanion.in/interviews/malayalam-interview/we-look-at-neelavelicham-as-a-tribute-to-bhargavi-nilayam-tovino-thomas-aashiq-abu-rima-kallingal",
-      "publisher": { "@type": "Organization", "name": "Film Companion" }
-    },
-    {
-      "@type": "Article",
-      "headline": "Neelathamara to Neelavelicham: Do old Malayalam classics warrant a remake?",
-      "url": "https://www.thenewsminute.com/kerala/neelathamara-neelavelicham-do-old-malayalam-classics-warrant-remake-177093",
-      "publisher": { "@type": "Organization", "name": "The News Minute" }
-    },
-    {
-      "@type": "Article",
-      "headline": "Neelavelicham review: Aashiq Abu's experimental movie is a technical upgrade of 1964's 'Bhargavi Nilayam'",
-      "url": "https://thesouthfirst.com/entertainment/neelavelicham-movie-review/",
-      "publisher": { "@type": "Organization", "name": "South First" }
-    },
-    {
-      "@type": "Article",
-      "headline": "Once an online community and now a rationalists forum: Meet the Freethinkers of Kerala",
-      "url": "https://www.thenewsminute.com/kerala/once-online-community-and-now-rationalists-forum-meet-freethinkers-kerala-60192",
-      "publisher": { "@type": "Organization", "name": "The News Minute" }
-    },
-    {
-      "@type": "Article",
-      "headline": "ഭാര്‍ഗവി മുതല്‍ ഭാര്‍ഗവി വരെ",
-      "inLanguage": "ml",
-      "url": "https://truecopythink.media/movies/neelavelicham-film-review-by-jijo-kuriakkose",
-      "publisher": { "@type": "Organization", "name": "Truecopy Think" }
-    }
-  ],
-  "sameAs": [
-    "https://github.com/stultus",
-    "https://x.com/_stultus",
-    "https://www.linkedin.com/in/stultus/",
-    "https://instagram.com/stultusz",
-    "https://www.facebook.com/stultus.hrishi",
-    "https://www.imdb.com/name/nm13490131/",
-    "https://ml.wikipedia.org/wiki/user:Hrishikesh.kb",
-    "https://stultus.in/notes/stultus/"
-  ]
-}
-</script>
+{{ partial "person-schema.html" . }}
 {{ end }}
 
+{{/* ── JSON-LD: BlogPosting (posts) ── */}}
 {{ if and .IsPage (eq .Section "post") }}
 <script type="application/ld+json">
 {

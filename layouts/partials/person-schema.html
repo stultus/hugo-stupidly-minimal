@@ -1,0 +1,21 @@
+{{/*
+  Default Person JSON-LD for the about page.
+  Sites using this theme can provide their own
+  layouts/partials/person-schema.html to override this with richer data
+  (jobTitle, worksFor, sameAs, knowsAbout, subjectOf, alumniOf, etc.).
+*/}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ .Site.Params.author }}",
+  "url": "{{ .Site.BaseURL }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  }{{ with .Site.Params.alternateNames }},
+  "alternateName": {{ split . "," | jsonify | safeJS }}{{ end }}{{ with .Site.Params.description }},
+  "description": {{ . | jsonify }}{{ end }}{{ with .Site.Params.avatarurl }},
+  "image": "{{ . | absURL }}"{{ end }}
+}
+</script>
