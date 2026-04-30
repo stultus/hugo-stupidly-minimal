@@ -10,7 +10,11 @@
 {{ with .Params.keywords }}
 <meta name="keywords" content="{{ delimit . ", " }}">
 {{ else }}
+  {{ with .Params.tags }}
+<meta name="keywords" content="{{ delimit . ", " }}">
+  {{ else }}
 <meta name="keywords" content="{{ .Site.Params.keywords }}">
+  {{ end }}
 {{ end }}
 
 {{/* ── Determine description ── */}}
@@ -26,7 +30,7 @@
 {{/* ── Determine title for social ── */}}
 {{ $socialTitle := printf "%s — %s" .Title .Site.Params.author }}
 {{ if .IsHome }}{{ $socialTitle = printf "%s — %s" .Site.Params.author .Site.Params.tagline }}{{ end }}
-{{ if eq .Type "about" }}{{ $socialTitle = printf "About %s (stultus) — %s" .Site.Params.author .Site.Params.tagline }}{{ end }}
+{{ if eq .Type "about" }}{{ $socialTitle = printf "About %s (stultus) — VP Engineering at Entri | Developer & FOSS Contributor" .Site.Params.author }}{{ end }}
 
 {{/* ── Open Graph ── */}}
 <meta property="og:site_name" content="{{ .Site.Params.author }}">
@@ -107,6 +111,20 @@
     "name": "Entri",
     "url": "https://entri.me"
   },
+  "memberOf": [
+    {
+      "@type": "Organization",
+      "name": "TinkerHub Foundation",
+      "url": "https://tinkerhub.org/",
+      "description": "A community of tinkerers, makers, and students working to empower people who share a passion to innovate."
+    },
+    {
+      "@type": "Organization",
+      "name": "Swathanthra Malayalam Computing",
+      "alternateName": "SMC",
+      "url": "https://smc.org.in"
+    }
+  ],
   "url": "{{ .Permalink }}",
   "image": "{{ "img/hrishikesh_bhaskaran.jpg" | absURL }}",
   "description": "Hrishikesh Bhaskaran is a software engineer, FOSS contributor, and screenwriter from Kerala, India. Vice President of Engineering at Entri. Also known by the pseudonym stultus.",

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{{ if .IsHome }}{{ .Site.Params.author }} — {{ .Site.Params.tagline }}{{ else if eq .Type "about" }}About {{ .Site.Params.author }} (stultus) — {{ .Site.Params.tagline }}{{ else }}{{ .Title }} — {{ .Site.Params.author }}{{ end }}</title>
+  <title>{{ if .IsHome }}{{ .Site.Params.author }} — {{ .Site.Params.tagline }}{{ else if eq .Type "about" }}About {{ .Site.Params.author }} (stultus) — VP Engineering at Entri | Developer & FOSS Contributor{{ else }}{{ .Title }} — {{ .Site.Params.author }}{{ end }}</title>
   {{ $desc := .Site.Params.description }}
   {{ with .Description }}{{ $desc = . }}{{ end }}
   {{ if and .IsPage (not .Description) }}{{ with .Summary }}{{ $desc = . | plainify | truncate 160 }}{{ end }}{{ end }}
