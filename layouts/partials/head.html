@@ -30,7 +30,7 @@
 {{/* ── Determine title for social ── */}}
 {{ $socialTitle := printf "%s — %s" .Title .Site.Params.author }}
 {{ if .IsHome }}{{ $socialTitle = printf "%s — %s" .Site.Params.author .Site.Params.tagline }}{{ end }}
-{{ if eq .Type "about" }}{{ $socialTitle = printf "About %s (stultus) — VP Engineering at Entri | Developer & FOSS Contributor" .Site.Params.author }}{{ end }}
+{{ if eq .Type "about" }}{{ $socialTitle = printf "About %s (stultus) — VP Engineering at Entri | Developer, Screenwriter & FOSS Contributor" .Site.Params.author }}{{ end }}
 
 {{/* ── Open Graph ── */}}
 <meta property="og:site_name" content="{{ .Site.Params.author }}">
