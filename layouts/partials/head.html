@@ -137,7 +137,11 @@
       "url": "https://smc.org.in"
     }
   ],
-  "url": "{{ .Permalink }}",
+  "url": "{{ .Site.BaseURL }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  },
   "image": "{{ "img/hrishikesh_bhaskaran.jpg" | absURL }}",
   "description": "Hrishikesh Bhaskaran is a software engineer, FOSS contributor, and screenwriter from Kerala, India. Vice President of Engineering at Entri. Also known by the pseudonym stultus.",
   "nationality": "Indian",
